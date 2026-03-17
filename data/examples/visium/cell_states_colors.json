@@ -1,0 +1,13 @@
+{
+  "stromal/endothelial": "#D3D3D3",
+  "mixed": "#8dd593",
+  "stromal/endothelial/immune": "#d33f6a",
+  "stromal": "#bec1d4",
+  "mixed/invasive": "#f0b98d",
+  "invasive": "#ef9708",
+  "adipocytes": "#0fcfc0",
+  "DCIS #1": "#8595e1",
+  "immune": "#8e063b",
+  "DCIS #2": "#023fa5",
+  "myoepithelial/stromal/immune": "#e07b91"
+}

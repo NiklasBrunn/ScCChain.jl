@@ -1,0 +1,22 @@
+{
+  "DCIS_2": "#023fa5",
+  "Macrophages_1": "#d33f6a",
+  "Unlabeled": "#7f7f7f",
+  "Invasive_Tumor": "#ef9708",
+  "Stromal": "#bec1d4",
+  "DCIS_1": "#8595e1",
+  "Myoepi_ACTA2+": "#8dd593",
+  "CD8+_T_Cells": "#8e063b",
+  "Endothelial": "#7d87b9",
+  "Prolif_Invasive_Tumor": "#f0b98d",
+  "T_Cell_&_Tumor_Hybrid": "#e6afb9",
+  "Mast_Cells": "#4a6fe3",
+  "CD4+_T_Cells": "#d6bcc0",
+  "B_Cells": "#0fcfc0",
+  "Macrophages_2": "#d5eae7",
+  "Stromal_&_T_Cell_Hybrid": "#bb7784",
+  "Perivascular-Like": "#c7c7c7",
+  "LAMP3+_DCs": "#e07b91",
+  "IRF7+_DCs": "#ead3c6",
+  "Myoepi_KRT15+": "#c6dec7"
+}
