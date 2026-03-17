@@ -21,6 +21,8 @@ data/examples/*
 !data/databases/CellNEST/
 !data/databases/CellNEST/human_signaling_ppi.csv
 !data/databases/CellNEST/mouse_signaling_ppi.csv
+!data/examples/visium/cell_states_colors.json
+!data/examples/xenium/cell_states_colors_original.json
 
 # CondaPkg / Python
 .CondaPkg/
