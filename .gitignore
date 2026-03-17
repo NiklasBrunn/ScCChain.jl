@@ -1,0 +1,40 @@
+# Julia
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+
+# Data files (large; download separately)
+*.h5ad
+*.h5
+*.loom
+*.zarr/
+*.jld2
+*.bson
+data/*
+!data/databases/
+!data/examples/
+data/databases/*
+data/examples/*
+!data/databases/cellchat/
+!data/databases/cellchat/CellChatDB_human_interaction.csv
+!data/databases/cellchat/CellChatDB_mouse_interaction.csv
+!data/databases/CellNEST/
+!data/databases/CellNEST/human_signaling_ppi.csv
+!data/databases/CellNEST/mouse_signaling_ppi.csv
+
+# CondaPkg / Python
+.CondaPkg/
+__pycache__/
+*.py[cod]
+.venv/
+.conda/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Output
+output/

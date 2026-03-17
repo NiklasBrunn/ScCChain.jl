@@ -1,0 +1,12 @@
+channels = ["conda-forge"]
+
+[deps]
+anndata = ">=0"
+scanpy = ">=0"
+numpy = ">=0"
+pandas = ">=0"
+scipy = ">=0"
+h5py = ">=0"
+pyarrow = ">=0"
+openpyxl = ">=0"
+python = ">=3.9,<3.13"
