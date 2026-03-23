@@ -119,11 +119,12 @@ data/         Bundled databases (CellChat, PPI)
 If you use scCChain in your work, please cite:
 
 ```bibtex
-@article{brunn2026scCChain,
+@article{brunn2026mapping,
   title={Mapping spatial cell-cell communication programs by tailoring chains of cells for transformer neural networks},
-  author={Brunn, Niklas and Canal Guitart, Laia and Farhadyar, Kiana and Fullio, Camila L. and Kailer, Jakob and Vogel, Tanja and Hackenberg, Maren and Binder, Harald},
+  author={Brunn, Niklas and Guitart, Laia C and Farhadyar, Kiana and Fullio, Camila L and Kailer, Jakob and Vogel, Tanja and Hackenberg, Maren and Binder, Harald},
+  journal={bioRxiv},
   year={2026},
-  note={Preprint}
+  publisher={Cold Spring Harbor Laboratory}
 }
 ```
 
