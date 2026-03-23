@@ -118,6 +118,8 @@ data/         Bundled databases (CellChat, PPI)
 
 If you use scCChain in your work, please cite:
 
+Brunn, N., Guitart, L. C., Farhadyar, K., Fullio, C. L., Kailer, J., Vogel, T., Hackenberg, M., & Binder, H. (2026). Mapping spatial cell-cell communication programs by tailoring chains of cells for transformer neural networks. *bioRxiv*, 2026.03.18.712664. https://doi.org/10.64898/2026.03.18.712664v1
+
 ```bibtex
 @article{brunn2026mapping,
   title={Mapping spatial cell-cell communication programs by tailoring chains of cells for transformer neural networks},
