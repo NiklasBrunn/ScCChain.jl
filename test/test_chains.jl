@@ -292,7 +292,7 @@ end
     @test md_a == md_b
 end
 
-@testset "metadata enrichment overloads match legacy signatures" begin
+@testset "metadata enrichment overloads match signatures" begin
     chains = [[1, 2, 3], [4, 5]]
     labels = ["I1", "I2"]
     cell_types = ["A", "B", "C", "D", "E"]

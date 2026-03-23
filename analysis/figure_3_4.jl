@@ -1,9 +1,9 @@
 #=
-Figure 3/4 reproduction script — new scCChain API
-===================================================
+Figure 3/4 reproduction script
+==============================
 
 Reproduces all panels of manuscript Figures 3 and 4 (10x Xenium human breast
-cancer, single-LR-pair CXCL12—CXCR4 analysis) using ONLY the new scCChain API.
+cancer, single-LR-pair CXCL12—CXCR4 analysis).
 
 Pipeline: load data → build graph → sample chains → train model → analyze
 
@@ -42,14 +42,14 @@ cell_annotation = ScCChain.cell_annotation(scdata; column = "Cluster")
 println("  X shape = $(size(X)), cell_locations shape = $(size(cell_locations))")
 println("  n_genes = $(size(X, 2)), n_cells = $(length(cell_annotation))")
 
-# PCA on non-zero columns of full X (matching legacy Float32 precision)
+# PCA on non-zero columns of full X
 pcs = pca(scdata; k = 30, promote_float64 = false)
 
 # Cell type colormap from JSON
 colormap_path = joinpath(DATA_PATH, "cell_states_colors_original.json")
 color_dict = JSON.parsefile(colormap_path)
 cell_type_colormap = Dict{String,String}(String(k) => String(v) for (k, v) in color_dict)
-# Sorted hex codes for plot_spatial (matching legacy sort order)
+# Sorted hex codes for plot_spatial
 sorted_pairs = sort(collect(cell_type_colormap); by = first)
 hexcodes = last.(sorted_pairs)
 
@@ -64,7 +64,7 @@ base_plot = plot_spatial(
     plot_size = (1200, 600),
 )
 
-# Scale bar: 50 μm (matching legacy)
+# Scale bar: 50 μm
 xs = cell_locations[:, 1]
 ys = cell_locations[:, 2]
 xmax = maximum(xs)
@@ -373,7 +373,7 @@ println("─── Checkpoint 9: Distance boxplots ───")
 # Get the top 20% metadata subset
 meta_top20 = subset_chain_metadata!(chain_metadata, pct_kept)
 
-# Extract distance columns (new API column names)
+# Extract distance columns
 first_last_dist = Float64.(meta_top20.first_sender_receiver_distance)
 max_attn_dist = Float64.(coalesce.(meta_top20.max_attention_sender_receiver_distance, NaN))
 max_attn_dist_clean = filter(!isnan, max_attn_dist)
@@ -498,8 +498,6 @@ println("  Checkpoint 10 saved.")
 println("─── Checkpoint 11: Per-receiver-type distance boxplots ───")
 
 # Max attention sender cell IDs for top 20% chains (from metadata).
-# All chains have length >= 2, so max_attention_sender_cell_ids is never missing.
-# Use top_pct_inds (not top_pct_mask) to match the ordering of top_chains.
 top_meta = chain_metadata[top_pct_inds, :]
 top_most_attended_sender_ids = Int.(top_meta.max_attention_sender_cell_ids)
 
@@ -541,7 +539,6 @@ for rtype in receiver_types
         (sender_types = unique_sender_types, sender_distances = sender_distances)
 
     # Build boxplot: one box per sender type, colored by cell type.
-    # Use integer positions + xticks! for label alignment (matching legacy approach).
     n_stypes = length(unique_sender_types)
     pl_width = max(800, 120 * n_stypes)
     pl = plot(;

@@ -1,9 +1,9 @@
 #=
-Figure 2 reproduction script — new scCChain API
-=================================================
+Figure 2 reproduction script
+============================
 
 Reproduces all 8 panels of manuscript Figure 2 (10x Visium human breast cancer
-communication program analysis) using ONLY the new scCChain API.
+communication program analysis).
 
 Pipeline: load data → build graph → discover programs → sample chains → train model → analyze
 
@@ -44,7 +44,6 @@ scdata = load_scdata(H5AD_PATH; subset_highly_variable = true)
 cell_annotation = ScCChain.cell_annotation(scdata; column = "Annotation")
 
 # Coordinate transform: swap x/y and flip y to match manuscript orientation
-# (isometric — preserves distances, so scdata can still be used for graph construction)
 coords = Float32.(spatial_coords(scdata))
 coords = coords[:, [2, 1]]
 coords[:, 2] .= coords[:, 2] .* -1.0f0
@@ -432,7 +431,7 @@ println("  Checkpoint 9 saved.")
 # ╚══════════════════════════════════════════════════════════════════════════════
 println("─── Checkpoint 10: Top LR pairs ───")
 
-# top_features keys use the ORIGINAL cluster numbering (before _densify_integers).
+# top_features keys use the original cluster numbering (before _densify_integers).
 # cp_mapping maps densified cluster ID → original cluster ID.
 focus_cp_num = parse(Int, replace(focus_cp, "CP_" => ""))
 mapped_key = "$(programs.cp_mapping[focus_cp_num])"
@@ -537,6 +536,3 @@ println("  Checkpoint 11 saved.")
 println("\n═══ Figure 2 reproduction complete! ═══")
 println("Panels saved to: $(PANELS_DIR)")
 println("Checkpoints saved to: $(CHECKPOINTS_DIR)")
-println(
-    "HVG-only note: this workflow now loads Visium data with subset_highly_variable=true, so parity drift versus the earlier full-data path is expected at the data-loading boundary.",
-)

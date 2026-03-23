@@ -1,8 +1,7 @@
 import SparseArrays
 
 function build_pair_feature_matrix(graph; min_obs::Int = 0, min_features::Int = 0)
-    # Use distance scores from graph metadata for row ordering (column-major via findnz),
-    # matching legacy CCIM construction where rows = findnz(distance_scores).
+    # Use distance scores from graph metadata for row ordering (column-major via findnz).
     dist_scores = get(graph.metadata, "_distance_scores", nothing)
 
     if !isnothing(dist_scores)

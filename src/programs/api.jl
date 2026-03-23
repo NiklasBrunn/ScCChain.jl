@@ -213,8 +213,7 @@ function discover_programs_bae(graph; n_programs::Int = 10, kwargs...)
     metadata["receiver_index"] = receiver_index
     metadata["communication_names"] = communication_names
 
-    # Compute top_features from the FULL split-nonneg loadings (all 2*zdim columns),
-    # matching legacy topFeatures_per_Cluster which uses pre-basis-selection loadings.
+    # Compute top_features from the FULL split-nonneg loadings (all 2*zdim columns).
     full_loadings = result.loadings_split_nonnegative
     top_features = _top_features_from_loadings(full_loadings, communication_names)
 

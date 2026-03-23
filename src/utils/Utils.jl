@@ -25,7 +25,7 @@ Columns with zero or non-finite std are mean-centered only (not scaled).
 - `corrected::Bool=true`: use Bessel-corrected std (N-1 denominator)
 - `promote_float64::Bool=true`: if `true`, promote input to Float64 before SVD
   for numerical stability; set to `false` to operate in the input element type
-  (e.g. Float32) for exact legacy reproduction
+  (e.g. Float32)
 
 # Returns
 - `Matrix` of shape `(n_obs, k)` — the first `k` principal component scores
