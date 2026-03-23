@@ -10,18 +10,22 @@ end
 
 Result container for communication program discovery via BAE.
 
+After the split-nonneg expansion, each of the `n_zdims` latent dimensions yields
+two communication programs (CPs), for a total of `2 * n_zdims` CPs.
+
 # Fields
-- `encoder_weights::Matrix{Float32}`: sparse encoder weight matrix `(n_features, n_programs)`
-- `loadings_split_nonnegative::Matrix{Float32}`: non-negative split loadings `(n_features, 2*n_programs)`
-- `latent::Matrix{Float32}`: latent representation `(n_pairs, n_programs)`
-- `cluster_probs::Matrix{Float32}`: soft cluster assignment probabilities `(n_programs, n_pairs)`
-- `cluster_labels::Vector{Int}`: hard cluster assignments per pair
+- `encoder_weights::Matrix{Float32}`: sparse encoder weight matrix `(n_features, n_zdims)`
+- `loadings_split_nonnegative::Matrix{Float32}`: non-negative split loadings `(n_features, 2*n_zdims)`;
+  each column corresponds to one CP
+- `latent::Matrix{Float32}`: latent representation `(n_pairs, 2*n_zdims)`
+- `cluster_probs::Matrix{Float32}`: soft CP assignment probabilities `(2*n_zdims, n_pairs)`
+- `cluster_labels::Vector{Int}`: hard CP assignments per pair
 - `latent_split_softmax::Matrix{Float32}`: softmax-transformed split latent
 - `pair_metadata::NamedTuple`: `(sender_index, receiver_index)` cell ID vectors
 - `basis_selection::NamedTuple`: basis selection results (enabled, keep, drop, stats, ...)
-- `cp_mapping::Dict{Int,Int}`: mapping from dense program indices to original indices
+- `cp_mapping::Dict{Int,Int}`: mapping from dense CP indices to original (pre-filtering) indices
 - `metadata::Dict{String,Any}`: additional metadata (communication_names, sparsity, ...)
-- `top_features::Dict{String,DataFrame}`: ranked features per program from `_top_features_from_loadings`
+- `top_features::Dict{String,DataFrame}`: ranked features per CP from `_top_features_from_loadings`
 """
 Base.@kwdef struct ProgramResult
     encoder_weights::Matrix{Float32}

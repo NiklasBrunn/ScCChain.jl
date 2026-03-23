@@ -47,7 +47,7 @@ pcs = pca(scdata; k=30)
 graph = build_cell_graph(scdata, db; radius=300, alpha=0.00002, dim_red=pcs)
 
 # Discover communication programs
-programs = discover_programs_bae(graph; n_programs=8, seed=42)
+programs = discover_programs_bae(graph; n_zdims=8, seed=42)
 
 # Sample communication chains
 chain_result = sample_chains(graph, programs; n_samples=5, n_steps=5, seed=42)

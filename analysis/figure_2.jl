@@ -131,7 +131,7 @@ println("─── Checkpoint 4: Discovering communication programs ───")
 
 programs = discover_programs_bae(
     graph;
-    n_programs = 8,
+    n_zdims = 8,
     max_iter = 10000,
     tol = 1e-5,
     batchsize = 512,
@@ -148,8 +148,8 @@ programs = discover_programs_bae(
     soft_clustering = true,
 )
 
-n_programs_kept = length(unique(programs.cluster_labels))
-println("  Programs kept: $(n_programs_kept)")
+n_cps = length(unique(programs.cluster_labels))
+println("  CPs kept: $(n_cps)")
 
 # Panel (b): Pathway bar chart — uses post-filtering communication names from programs
 pathway_lookup = Dict{String,String}()
@@ -171,7 +171,7 @@ pl_b = plot_bars(
 savefig(pl_b, joinpath(PANELS_DIR, "panel_b_pathway_bars.png"))
 println("  Panel (b) saved.")
 
-JLD2.@save joinpath(CHECKPOINTS_DIR, "checkpoint_04.jld2") n_programs_kept
+JLD2.@save joinpath(CHECKPOINTS_DIR, "checkpoint_04.jld2") n_cps
 println("  Checkpoint 4 saved.")
 
 # ╔══════════════════════════════════════════════════════════════════════════════
@@ -256,7 +256,7 @@ println("─── Checkpoint 7: Chain count bars ───")
 
 # Create communication colormap using layer order (CP_1 through CP_N)
 cp_colormap = Dict{String,String}()
-for i = 1:n_programs_kept
+for i = 1:n_cps
     cp_colormap["CP_$(i)"] = ScCChain.Plotting.COMMUNICATION_COLORS[mod1(
         i,
         length(ScCChain.Plotting.COMMUNICATION_COLORS),
@@ -364,7 +364,7 @@ println("─── Checkpoint 9: Gini impurity scores ───")
 
 gini_pcts = [10, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100]
 n_unique_cell_types = length(unique(cell_annotation))
-cp_nums = ["CP_$(i)" for i = 1:n_programs_kept]
+cp_nums = ["CP_$(i)" for i = 1:n_cps]
 
 # Compute Gini per CP across error percentiles
 gini_scores_receiver = Matrix{Float64}(undef, length(gini_pcts), length(cp_nums))

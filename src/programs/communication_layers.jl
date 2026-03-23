@@ -41,7 +41,7 @@ end
 Convert a per-pair communication-program matrix into per-program cell-cell communication layers.
 
 # Arguments
-- `CPmat`: Pair-by-program matrix (`n_pairs × n_programs`), dense or sparse.
+- `CPmat`: Pair-by-CP matrix (`n_pairs × n_CPs`), dense or sparse.
 - `n_cells::Int`: Number of cells/spots (layer size will be `n_cells × n_cells`).
 - `pair_metadata`: Metadata aligned to rows of `CPmat`, providing sender/receiver indices.
 

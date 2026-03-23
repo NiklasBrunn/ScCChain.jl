@@ -108,7 +108,7 @@ end
     g = _toy_graph()
     adv = discover_programs_bae(
         g;
-        n_programs = 2,
+        n_zdims = 2,
         seed = 3,
         n_runs = 1,
         max_iter = 3,
@@ -146,7 +146,7 @@ end
 
 @testset "BAE clustering artifacts without basis filtering" begin
     g = _toy_graph()
-    out = discover_programs_bae(g; n_programs = 2, seed = 2, max_iter = 3, batchsize = 8)
+    out = discover_programs_bae(g; n_zdims = 2, seed = 2, max_iter = 3, batchsize = 8)
     @test out isa ScCChain.ProgramResult
     @test hasproperty(out, :cluster_probs)
     @test hasproperty(out, :cluster_labels)
@@ -159,7 +159,7 @@ end
     g = _toy_graph()
     out = discover_programs_bae(
         g;
-        n_programs = 2,
+        n_zdims = 2,
         seed = 4,
         n_runs = 1,
         max_iter = 3,
@@ -183,7 +183,7 @@ end
     g = _toy_graph()
     out = discover_programs_bae(
         g;
-        n_programs = 2,
+        n_zdims = 2,
         seed = 9,
         max_iter = 3,
         batchsize = 8,
@@ -200,7 +200,7 @@ end
 
 @testset "discover_programs contract" begin
     g = _toy_graph()
-    out = discover_programs(g; n_programs = 2, seed = 5, n_runs = 1, max_iter = 3)
+    out = discover_programs(g; n_zdims = 2, seed = 5, n_runs = 1, max_iter = 3)
     @test out isa ScCChain.ProgramResult
     @test size(out.encoder_weights, 2) == 2
     @test size(out.loadings_split_nonnegative, 2) == 4
@@ -211,7 +211,7 @@ end
 
 @testset "Programs BAE API" begin
     g = _toy_graph()
-    out = discover_programs(g; n_programs = 2, seed = 11, max_iter = 2, batchsize = 4)
+    out = discover_programs(g; n_zdims = 2, seed = 11, max_iter = 2, batchsize = 4)
 
     @test out isa ScCChain.ProgramResult
     @test hasproperty(out, :encoder_weights)
@@ -223,7 +223,7 @@ end
 
 @testset "top_features_per_program" begin
     g = _toy_graph()
-    out = discover_programs(g; n_programs = 2, seed = 12, max_iter = 2, batchsize = 4)
+    out = discover_programs(g; n_zdims = 2, seed = 12, max_iter = 2, batchsize = 4)
     tf = top_features_per_program(out)
     @test tf isa Dict{String,DataFrame}
     @test !isempty(tf)

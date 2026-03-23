@@ -63,32 +63,36 @@ function top_features_per_program(programs)
 end
 
 """
-    discover_programs(graph; n_programs=10, kwargs...)
+    discover_programs(graph; n_zdims=10, kwargs...)
 
 Communication-program API returning typed BAE artifacts used by downstream
 chain sampling and modeling.
 
 # Arguments
 - `graph`: `CellGraph` from `build_cell_graph`.
-- `n_programs::Int=10`: Number of latent communication programs.
+- `n_zdims::Int=10`: Number of latent dimensions for BAE. After the split-nonneg
+  expansion, each latent dimension yields two communication programs (CPs),
+  resulting in `2 * n_zdims` CPs.
 - `kwargs...`: Forwarded to `discover_programs_bae`.
 
 # Returns
 - [`ProgramResult`](@ref)
 """
-function discover_programs(graph; n_programs::Int = 10, kwargs...)
-    return discover_programs_bae(graph; n_programs = n_programs, kwargs...)
+function discover_programs(graph; n_zdims::Int = 10, kwargs...)
+    return discover_programs_bae(graph; n_zdims = n_zdims, kwargs...)
 end
 
 """
-    discover_programs_bae(graph; n_programs=10, kwargs...)
+    discover_programs_bae(graph; n_zdims=10, kwargs...)
 
 Advanced BAE API returning detailed typed artifacts and metadata for communication program
 discovery on directed cell-pair observations derived from graph communication layers.
 
 # Arguments
 - `graph`: `CellGraph` from `build_cell_graph`.
-- `n_programs::Int=10`: Number of latent communication programs.
+- `n_zdims::Int=10`: Number of latent dimensions for BAE. After the split-nonneg
+  expansion, each latent dimension yields two communication programs (CPs),
+  resulting in `2 * n_zdims` CPs.
 
 ## BAE hyperparameters (via `kwargs`)
 - `seed::Int=42`: Random seed used for batching and initialization.
@@ -118,7 +122,7 @@ discovery on directed cell-pair observations derived from graph communication la
 # Returns
 - [`ProgramResult`](@ref)
 """
-function discover_programs_bae(graph; n_programs::Int = 10, kwargs...)
+function discover_programs_bae(graph; n_zdims::Int = 10, kwargs...)
     basis_selection = Bool(get(kwargs, :basis_selection, false))
     basis_nbins = Int(get(kwargs, :basis_nbins, 1024))
     basis_j_threshold = Float64(get(kwargs, :basis_j_threshold, 0.85))
@@ -128,7 +132,7 @@ function discover_programs_bae(graph; n_programs::Int = 10, kwargs...)
     basis_j_threshold >= 0 || throw(ArgumentError("basis_j_threshold must be >= 0"))
 
     hp = BAEHyperparameters(
-        zdim = n_programs,
+        zdim = n_zdims,
         n_runs = get(kwargs, :n_runs, 1),
         max_iter = get(kwargs, :max_iter, 100),
         tol = isnothing(get(kwargs, :tol, 1.0f-5)) ? nothing :
